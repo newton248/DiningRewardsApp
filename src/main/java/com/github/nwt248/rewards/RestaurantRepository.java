@@ -8,10 +8,10 @@ package com.github.nwt248.rewards;
  */
 public interface RestaurantRepository {
 
-	/**
-	 * Load a Restaurant entity by its merchant number.
-	 * @param merchantNumber the merchant number
-	 * @return the restaurant
-	 */
-	public Restaurant findByMerchantNumber(String merchantNumber);
+  /**
+   * Load a Restaurant entity by its merchant number.
+   * @param merchantNumber the merchant number
+   * @return the restaurant
+   */
+  public Restaurant findByMerchantNumber(String merchantNumber);
 }

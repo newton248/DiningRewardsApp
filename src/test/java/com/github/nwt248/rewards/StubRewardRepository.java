@@ -12,11 +12,11 @@ import com.github.nwt248.rewards.RewardRepository;
  */
 public class StubRewardRepository implements RewardRepository {
 
-	public RewardConfirmation confirmReward(AccountContribution contribution, Dining dining) {
-		return new RewardConfirmation(confirmationNumber(), contribution);
-	}
+  public RewardConfirmation confirmReward(AccountContribution contribution, Dining dining) {
+    return new RewardConfirmation(confirmationNumber(), contribution);
+  }
 
-	private String confirmationNumber() {
-		return new Random().toString();
-	}
+  private String confirmationNumber() {
+    return new Random().toString();
+  }
 }

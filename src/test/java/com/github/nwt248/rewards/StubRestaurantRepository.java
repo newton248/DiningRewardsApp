@@ -19,19 +19,19 @@ import com.github.nwt248.rewards.RestaurantRepository;
  */
 public class StubRestaurantRepository implements RestaurantRepository {
 
-	private Map<String, Restaurant> restaurantsByMerchantNumber = new HashMap<String, Restaurant>();
+  private Map<String, Restaurant> restaurantsByMerchantNumber = new HashMap<String, Restaurant>();
 
-	public StubRestaurantRepository() {
-		Restaurant restaurant = new Restaurant("1234567890", "Apple Bees");
-		restaurant.setBenefitPercentage(Percentage.valueOf("8%"));
-		restaurantsByMerchantNumber.put(restaurant.getNumber(), restaurant);
-	}
+  public StubRestaurantRepository() {
+    Restaurant restaurant = new Restaurant("1234567890", "Apple Bees");
+    restaurant.setBenefitPercentage(Percentage.valueOf("8%"));
+    restaurantsByMerchantNumber.put(restaurant.getNumber(), restaurant);
+  }
 
-	public Restaurant findByMerchantNumber(String merchantNumber) {
-		Restaurant restaurant = (Restaurant) restaurantsByMerchantNumber.get(merchantNumber);
-		if (restaurant == null) {
-			throw new EmptyResultDataAccessException(1);
-		}
-		return restaurant;
-	}
+  public Restaurant findByMerchantNumber(String merchantNumber) {
+    Restaurant restaurant = (Restaurant) restaurantsByMerchantNumber.get(merchantNumber);
+    if (restaurant == null) {
+      throw new EmptyResultDataAccessException(1);
+    }
+    return restaurant;
+  }
 }

@@ -16,33 +16,33 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan({"com.github.nwt248.rewards"})
 public class RewardsConfig {
 
-	DataSource dataSource;
-		
-	public RewardNetwork rewardNetwork(){
-		return new RewardNetworkImpl(
-			accountRepository(), 
-			restaurantRepository(), 
-			rewardRepository());
-	}
-	
-	public AccountRepository accountRepository(){
-		JdbcAccountRepository repository = new JdbcAccountRepository();
-		repository.setDataSource(dataSource);
-		return repository;
-	}
-	
-	public RestaurantRepository restaurantRepository(){
-		JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource);
-		return repository;
-	}
-	
-	public RewardRepository rewardRepository(){
-		JdbcRewardRepository repository = new JdbcRewardRepository();
-		repository.setDataSource(dataSource);
-		return repository;
-	}
-	
-	//	xTODO-02: Remove all of the @Bean methods above.  Remove the @Autowired field.
-    //	Try executing the RewardNetworkTests test class. It should fail. Why?
-	
+  DataSource dataSource;
+    
+  public RewardNetwork rewardNetwork(){
+    return new RewardNetworkImpl(
+      accountRepository(), 
+      restaurantRepository(), 
+      rewardRepository());
+  }
+  
+  public AccountRepository accountRepository(){
+    JdbcAccountRepository repository = new JdbcAccountRepository();
+    repository.setDataSource(dataSource);
+    return repository;
+  }
+  
+  public RestaurantRepository restaurantRepository(){
+    JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource);
+    return repository;
+  }
+  
+  public RewardRepository rewardRepository(){
+    JdbcRewardRepository repository = new JdbcRewardRepository();
+    repository.setDataSource(dataSource);
+    return repository;
+  }
+  
+  //  xTODO-02: Remove all of the @Bean methods above.  Remove the @Autowired field.
+    //  Try executing the RewardNetworkTests test class. It should fail. Why?
+  
 }
