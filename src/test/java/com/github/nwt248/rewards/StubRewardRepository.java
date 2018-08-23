@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.github.nwt248.rewards.AccountContribution;
 import com.github.nwt248.rewards.Dining;
-import com.github.nwt248.rewards.RewardConfirmation;
+import com.github.nwt248.rewards.RewardConfirmationImpl;
 import com.github.nwt248.rewards.RewardRepository;
 
 /**
@@ -13,7 +13,7 @@ import com.github.nwt248.rewards.RewardRepository;
 public class StubRewardRepository implements RewardRepository {
 
   public RewardConfirmation confirmReward(AccountContribution contribution, Dining dining) {
-    return new RewardConfirmation(confirmationNumber(), contribution);
+    return new RewardConfirmationImpl(confirmationNumber(), contribution);
   }
 
   private String confirmationNumber() {

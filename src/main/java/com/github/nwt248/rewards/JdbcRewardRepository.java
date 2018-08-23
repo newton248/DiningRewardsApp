@@ -53,7 +53,7 @@ public class JdbcRewardRepository implements RewardRepository {
       ps.setDate(6, new Date(dining.getDate().inMilliseconds()));
       ps.setBigDecimal(7, dining.getAmount().asBigDecimal());
       ps.execute();
-      return new RewardConfirmation(confirmationNumber, contribution);
+      return new RewardConfirmationImpl(confirmationNumber, contribution);
     } catch (SQLException e) {
       throw new RuntimeException("SQL exception occured inserting reward record", e);
     } finally {

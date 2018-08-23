@@ -11,7 +11,6 @@ import com.github.nwt248.rewards.AccountContribution;
 import com.github.nwt248.rewards.AccountRepository;
 import com.github.nwt248.rewards.Dining;
 import com.github.nwt248.rewards.RestaurantRepository;
-import com.github.nwt248.rewards.RewardConfirmation;
 import com.github.nwt248.rewards.RewardNetworkService;
 import com.github.nwt248.rewards.RewardRepository;
 
