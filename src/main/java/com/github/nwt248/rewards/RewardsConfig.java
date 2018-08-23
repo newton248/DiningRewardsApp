@@ -19,7 +19,7 @@ public class RewardsConfig {
   DataSource dataSource;
     
   public RewardNetwork rewardNetwork(){
-    return new RewardNetworkImpl(
+    return new RewardNetworkService(
       accountRepository(), 
       restaurantRepository(), 
       rewardRepository());

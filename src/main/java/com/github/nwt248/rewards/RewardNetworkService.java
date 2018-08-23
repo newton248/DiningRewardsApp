@@ -20,7 +20,7 @@ import com.github.nwt248.common.MonetaryAmount;
  * Decide if you should use field level or constructor injection. */
 
 @Service
-public class RewardNetworkImpl implements RewardNetwork {
+public class RewardNetworkService implements RewardNetwork {
 
   private AccountRepository accountRepository;
 
@@ -35,7 +35,7 @@ public class RewardNetworkImpl implements RewardNetwork {
    * @param rewardRepository the repository for recording a record of successful reward transactions
    */
   @Autowired
-  public RewardNetworkImpl(AccountRepository accountRepository, RestaurantRepository restaurantRepository,
+  public RewardNetworkService(AccountRepository accountRepository, RestaurantRepository restaurantRepository,
       RewardRepository rewardRepository) {
     this.accountRepository = accountRepository;
     this.restaurantRepository = restaurantRepository;

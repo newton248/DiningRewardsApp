@@ -5,33 +5,39 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 
 import com.github.nwt248.common.MonetaryAmount;
+import com.github.nwt248.rewards.AccountContribution;
+import com.github.nwt248.rewards.AccountRepository;
+import com.github.nwt248.rewards.Dining;
+import com.github.nwt248.rewards.RestaurantRepository;
+import com.github.nwt248.rewards.RewardConfirmation;
+import com.github.nwt248.rewards.RewardNetworkService;
+import com.github.nwt248.rewards.RewardRepository;
 
 /**
- * A system test that verifies the components of the RewardNetwork application work together to reward for dining
- * successfully. Uses Spring to bootstrap the application for use in a test environment.
+ * Unit tests for the RewardNetworkImpl application logic. Configures the implementation with stub repositories
+ * containing dummy data for fast in-memory testing without the overhead of an external data source.
  * 
- * xTODO-01: Run this test before making any changes.  It should pass.
+ * Besides helping catch bugs early, tests are a great way for a new developer to learn an API as he or she can see the
+ * API in action. Tests also help validate a design as they are a measure for how easy it is to use your code.
  */
 public class RewardNetworkTests {
 
   /**
    * The object being tested.
    */
-  private RewardNetwork rewardNetwork;
+  private RewardNetworkService rewardNetwork;
 
   @BeforeEach
-  public void setUp() {
-    // Create the test configuration for the application from two classes:
-    ApplicationContext context = SpringApplication.run(TestInfrastructureConfig.class);
+  public void setUp() throws Exception {
+    // create stubs to facilitate fast in-memory testing with dummy data and no external dependencies
+    AccountRepository accountRepo = new StubAccountRepository();
+    RestaurantRepository restaurantRepo = new StubRestaurantRepository();
+    RewardRepository rewardRepo = new StubRewardRepository();
 
-    
-    // Get the bean to use to invoke the application
-    rewardNetwork = context.getBean(RewardNetwork.class);
-
+    // setup the object being tested by handing what it needs to work
+    rewardNetwork = new RewardNetworkService(accountRepo, restaurantRepo, rewardRepo);
   }
 
   @Test
@@ -40,7 +46,6 @@ public class RewardNetworkTests {
     Dining dining = Dining.createDining("100.00", "1234123412341234", "1234567890");
 
     // call the 'rewardNetwork' to test its rewardAccountFor(Dining) method
-    // this fails if you have selected an account without beneficiaries!
     RewardConfirmation confirmation = rewardNetwork.rewardAccountFor(dining);
 
     // assert the expected reward confirmation results
@@ -51,7 +56,7 @@ public class RewardNetworkTests {
     AccountContribution contribution = confirmation.getAccountContribution();
     assertNotNull(contribution);
 
-    // the contribution account number should be '123456789'
+    // the account number should be '123456789'
     assertEquals("123456789", contribution.getAccountNumber());
 
     // the total contribution amount should be 8.00 (8% of 100.00)
