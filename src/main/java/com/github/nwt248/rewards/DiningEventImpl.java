@@ -11,7 +11,7 @@ import com.github.nwt248.common.SimpleDate;
  * 
  * A value object. Immutable.
  */
-public class Dining {
+public class DiningEventImpl implements DiningEvent {
 
   private MonetaryAmount amount;
 
@@ -28,7 +28,7 @@ public class Dining {
    * @param merchantNumber the merchant number of the restaurant where the dining occurred
    * @param date the date of the dining event
    */
-  public Dining(MonetaryAmount amount, String creditCardNumber, String merchantNumber, SimpleDate date) {
+  public DiningEventImpl(MonetaryAmount amount, String creditCardNumber, String merchantNumber, SimpleDate date) {
     this.amount = amount;
     this.creditCardNumber = creditCardNumber;
     this.merchantNumber = merchantNumber;
@@ -43,8 +43,8 @@ public class Dining {
    * @param merchantNumber the merchant number of the restaurant where the dining occurred
    * @return the dining event
    */
-  public static Dining createDining(String amount, String creditCardNumber, String merchantNumber) {
-    return new Dining(MonetaryAmount.valueOf(amount), creditCardNumber, merchantNumber, SimpleDate.today());
+  public static DiningEvent createDining(String amount, String creditCardNumber, String merchantNumber) {
+    return new DiningEventImpl(MonetaryAmount.valueOf(amount), creditCardNumber, merchantNumber, SimpleDate.today());
   }
 
   /**
@@ -58,47 +58,49 @@ public class Dining {
    * @param year the year of the dining event
    * @return the dining event
    */
-  public static Dining createDining(String amount, String creditCardNumber, String merchantNumber, int month,
+  public static DiningEvent createDining(String amount, String creditCardNumber, String merchantNumber, int month,
       int day, int year) {
-    return new Dining(MonetaryAmount.valueOf(amount), creditCardNumber, merchantNumber, new SimpleDate(month, day,
+    return new DiningEventImpl(MonetaryAmount.valueOf(amount), creditCardNumber, merchantNumber, new SimpleDate(month, day,
         year));
   }
 
-  /**
-   * Returns the amount of this dining--the total amount of the bill that was charged to the credit card.
-   */
-  public MonetaryAmount getAmount() {
+  /* (non-Javadoc)
+ * @see com.github.nwt248.rewards.DiningEvent#getAmount()
+ */
+  @Override
+public MonetaryAmount getAmount() {
     return amount;
   }
 
-  /**
-   * Returns the number of the credit card used to pay for this dining. For this dining to be eligible for reward,
-   * this credit card number should be associated with a valid account in the reward network.
-   */
-  public String getCreditCardNumber() {
+  /* (non-Javadoc)
+ * @see com.github.nwt248.rewards.DiningEvent#getCreditCardNumber()
+ */
+  @Override
+public String getCreditCardNumber() {
     return creditCardNumber;
   }
 
-  /**
-   * Returns the merchant number of the restaurant where this dining occurred. For this dining to be eligible for
-   * reward, this merchant number should be associated with a valid restaurant in the reward network.
-   */
-  public String getMerchantNumber() {
+  /* (non-Javadoc)
+ * @see com.github.nwt248.rewards.DiningEvent#getMerchantNumber()
+ */
+  @Override
+public String getMerchantNumber() {
     return merchantNumber;
   }
 
-  /**
-   * Returns the date this dining occurred on.
-   */
-  public SimpleDate getDate() {
+  /* (non-Javadoc)
+ * @see com.github.nwt248.rewards.DiningEvent#getDate()
+ */
+  @Override
+public SimpleDate getDate() {
     return date;
   }
 
   public boolean equals(Object o) {
-    if (!(o instanceof Dining)) {
+    if (!(o instanceof DiningEventImpl)) {
       return false;
     }
-    Dining other = (Dining) o;
+    DiningEventImpl other = (DiningEventImpl) o;
     // value objects are equal if their attributes are equal
     return amount.equals(other.amount) && creditCardNumber.equals(other.creditCardNumber)
         && merchantNumber.equals(other.merchantNumber) && date.equals(other.date);

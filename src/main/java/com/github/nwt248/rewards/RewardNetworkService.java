@@ -42,12 +42,12 @@ public class RewardNetworkService implements RewardNetwork {
     this.rewardRepository = rewardRepository;
   }
 
-  public RewardConfirmation rewardAccountFor(Dining dining) {
-    Account account = accountRepository.findByCreditCard(dining.getCreditCardNumber());
-    Restaurant restaurant = restaurantRepository.findByMerchantNumber(dining.getMerchantNumber());
-    MonetaryAmount amount = restaurant.calculateBenefitFor(account, dining);
+  public RewardConfirmation rewardAccountFor(DiningEvent event) {
+    Account account = accountRepository.findByCreditCard(event.getCreditCardNumber());
+    Restaurant restaurant = restaurantRepository.findByMerchantNumber(event.getMerchantNumber());
+    MonetaryAmount amount = restaurant.calculateBenefitFor(account, event);
     AccountContribution contribution = account.makeContribution(amount);
     accountRepository.updateBeneficiaries(account);
-    return rewardRepository.confirmReward(contribution, dining);
+    return rewardRepository.confirmReward(contribution, event);
   }
 }

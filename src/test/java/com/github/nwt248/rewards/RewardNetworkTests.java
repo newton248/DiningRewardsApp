@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.github.nwt248.common.MonetaryAmount;
 import com.github.nwt248.rewards.AccountContribution;
 import com.github.nwt248.rewards.AccountRepository;
-import com.github.nwt248.rewards.Dining;
+import com.github.nwt248.rewards.DiningEventImpl;
 import com.github.nwt248.rewards.RestaurantRepository;
 import com.github.nwt248.rewards.RewardNetworkService;
 import com.github.nwt248.rewards.RewardRepository;
@@ -42,7 +42,7 @@ public class RewardNetworkTests {
   @Test
   public void testRewardForDining() {
     // create a new dining of 100.00 charged to credit card '1234123412341234' by merchant '123457890' as test input
-    Dining dining = Dining.createDining("100.00", "1234123412341234", "1234567890");
+    DiningEvent dining = DiningEventImpl.createDining("100.00", "1234123412341234", "1234567890");
 
     // call the 'rewardNetwork' to test its rewardAccountFor(Dining) method
     RewardConfirmation confirmation = rewardNetwork.rewardAccountFor(dining);

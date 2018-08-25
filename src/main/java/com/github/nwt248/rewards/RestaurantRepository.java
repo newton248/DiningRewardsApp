@@ -6,7 +6,7 @@ package com.github.nwt248.rewards;
  * 
  * Objects returned by this repository are guaranteed to be fully-initialized and ready to use.
  */
-public interface RestaurantRepository {
+interface RestaurantRepository {
 
   /**
    * Load a Restaurant entity by its merchant number.

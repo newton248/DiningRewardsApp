@@ -66,7 +66,7 @@ public class Restaurant extends Entity {
    * @param dining a dining event that occurred
    * @return the benefit amount eligible for reward
    */
-  public MonetaryAmount calculateBenefitFor(Account account, Dining dining) {
+  public MonetaryAmount calculateBenefitFor(Account account, DiningEvent dining) {
     return dining.getAmount().multiplyBy(benefitPercentage);
   }
 
